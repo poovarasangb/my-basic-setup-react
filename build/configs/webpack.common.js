@@ -24,6 +24,9 @@ module.exports = () => ({
         chunkFilename: isProduction ? "js/[name].[contenthash].js" : "js/[name].js",
         path: outputPath
     },
+    optimization: {
+        runtimeChunk: 'single'
+    },
 
     resolve: {
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
@@ -33,6 +36,7 @@ module.exports = () => ({
         }
     },
 
+    devtool: 'source-map',
     devServer: {
         static: {
             directory: outputPath

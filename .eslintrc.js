@@ -8,7 +8,8 @@ module.exports = {
     },
     extends: [
         "eslint:recommended",
-        'plugin:react/recommended',
+        "plugin:react/recommended",
+        "plugin:react-hooks/recommended",
         "plugin:@typescript-eslint/eslint-recommended"
     ],
     overrides: [{
@@ -25,28 +26,29 @@ module.exports = {
         sourceType: "module"
     },
     plugins: [
-        'react',
-        'react-hooks',
+        "react",
+        "react-hooks",
         "import",
         "@typescript-eslint"
     ],
     rules: {
         "@typescript-eslint/semi": ["error", "always"],
-        'react/react-in-jsx-scope': 0,
-        'arrow-body-style': [2, 'as-needed'],
-        'prefer-template': 2,
-        'react/prop-types': 0,
-        'react-hooks/exhaustive-deps': 'error',
-        'semi-spacing': [
+        "react/react-in-jsx-scope": 0,
+        "arrow-body-style": [2, "as-needed"],
+        "prefer-template": 2,
+        "react/prop-types": 0,
+        "react-hooks/exhaustive-deps": "error",
+        "react-hooks/rules-of-hooks": "error",
+        "semi-spacing": [
             2,
             {
                 before: false,
                 after: true
             }
         ],
-        semi: [2, 'always'],
+        semi: [2, "always"],
         "object-property-newline": 1,
-        'object-curly-newline': [
+        "object-curly-newline": [
             2,
             {
                 consistent: true,
@@ -112,27 +114,23 @@ module.exports = {
             2,
             "never"
         ],
-        "import/dynamic-import-chunkname": [
-            2,
-            {
-                importFunctions: ["dynamicImport"],
-                webpackChunknameFormat: "[a-zA-Z0-9-./_]+"
-            }
-        ],
         "react/self-closing-comp": 2,
         "react/display-name": 0,
-        "no-console": 2
+        "no-console": 2,
+        "no-restricted-imports": [
+            "error",
+            {
+                "patterns": ["@mui/*/*/*"]
+            }
+        ]
     },
     settings: {
         react: {
-            version: 'detect'
+            version: "detect"
         },
         "import/resolver": {
             webpack: {
                 config: resolve(__dirname, "./build/configs/webpack.common.js")
-            },
-            node: {
-                extensions: [".js", ".jsx", ".ts", ".tsx"]
             }
         }
     }
