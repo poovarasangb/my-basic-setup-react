@@ -198,7 +198,12 @@ module.exports = {
                 ignoreTemplateLiterals: true
             }
         ],
-        "react/jsx-closing-bracket-location": [2, "tag-aligned"]
+        "react/jsx-closing-bracket-location": [2, "tag-aligned"],
+        "react/jsx-tag-spacing": [
+            2, {
+                beforeSelfClosing: "always"
+            }
+        ]
     },
     settings: {
         react: {
