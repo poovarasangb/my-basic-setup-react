@@ -1,11 +1,17 @@
-import { useCallback } from "react";
+import UseTime, { useTimeHook } from "./useTime";
 
 export const App = () => {
-    const renderName = useCallback(() => (
-        <h2 className="red">
-            {"Hello Pgb..!"}
-        </h2>
-    ), []);
-    return renderName();
+    const _time = new Date().getTime();
+    const { time } = useTimeHook(_time);
+    const date = new Date(time);
+    return (
+        <>
+            <UseTime
+                dateProps={_time}
+            />
+            <h2>
+                {`${date.toLocaleDateString() } :: ${ date.toLocaleTimeString()}`}
+            </h2>
+        </>
+    );
 };
-
