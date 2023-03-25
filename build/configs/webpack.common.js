@@ -1,20 +1,20 @@
-const { resolve } = require('path');
+const path = require("path");
 
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ESLintPlugin = require('eslint-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const ESLintPlugin = require("eslint-webpack-plugin");
 
 const isProduction = process.env.NODE_ENV === "production";
+const BASE_DIRECTORY = path.resolve("./");
 
 const {
-    entryFile, srcJsPath, portToListen, outputPath, srcCssPath,
-    srcImgPath
+    entryFile, srcJsPath, portToListen, outputPath
 } = require("../utils.js");
 
 module.exports = () => ({
-    mode: 'development',
+    mode: "development",
     entry: {
-        [entryFile]: resolve(srcJsPath, "index.js")
+        [entryFile]: path.join(BASE_DIRECTORY, "./src/js/index.js")
     },
 
     output: {
@@ -24,19 +24,20 @@ module.exports = () => ({
         chunkFilename: isProduction ? "js/[name].[contenthash].js" : "js/[name].js",
         path: outputPath
     },
+
     optimization: {
-        runtimeChunk: 'single'
+        runtimeChunk: "single"
     },
 
     resolve: {
-        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+        extensions: [".js", ".jsx", ".ts", ".tsx"],
         alias: {
-            js: srcJsPath,
-            scss: srcCssPath
+            js: path.resolve(path.resolve(__dirname, "../../src/js")),
+            scss: path.resolve(path.resolve(__dirname, "../../src/scss"))
         }
     },
 
-    devtool: 'source-map',
+    devtool: "source-map",
     devServer: {
         static: {
             directory: outputPath
@@ -45,13 +46,13 @@ module.exports = () => ({
             writeToDisk: true
         },
         port: portToListen,
-        hot: true,
-        liveReload: true
+        hot: false,
+        liveReload: false
     },
 
     plugins: [
         new HtmlWebpackPlugin({
-            favicon: resolve(srcImgPath, "logo.png")
+            favicon: path.resolve(__dirname, "../../src/img/logo.png")
         }),
         new MiniCssExtractPlugin({}),
         new ESLintPlugin({
@@ -66,13 +67,18 @@ module.exports = () => ({
     module: {
         rules: [
             {
+                test: /\.(ts|tsx)$/,
+                exclude: /node_modules/,
+                use: "babel-loader"
+            },
+            {
                 test: /\.(js|jsx|mjs)$/,
                 use: {
-                    loader: 'esbuild-loader',
+                    loader: "esbuild-loader",
                     options: {
-                        loader: 'jsx',
-                        target: 'es2015',
-                        jsx: 'automatic'
+                        loader: "jsx",
+                        target: "es2015",
+                        jsx: "automatic"
                     }
                 }
             },
@@ -81,22 +87,22 @@ module.exports = () => ({
                 use: [{
                     loader: MiniCssExtractPlugin.loader
                 }, {
-                    loader: 'css-loader',
+                    loader: "css-loader",
                     options: {
                         esModule: false,
                         url: true,
                         sourceMap: false
                     }
                 }, {
-                    loader: 'postcss-loader',
+                    loader: "postcss-loader",
                     options: {
                         sourceMap: false
                     }
                 }, {
-                    loader: 'sass-loader',
+                    loader: "sass-loader",
                     options: {
                         sourceMap: false,
-                        implementation: require('sass')
+                        implementation: require("sass")
                     }
                 }]
             }

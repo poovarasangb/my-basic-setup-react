@@ -2,37 +2,41 @@ const { resolve } = require("path");
 
 module.exports = {
     env: {
-        browser: true,
-        es6: true,
-        node: true
+        "browser": true,
+        "es6": true,
+        "node": true
     },
     extends: [
         "eslint:recommended",
         "plugin:react/recommended",
         "plugin:react-hooks/recommended",
-        "plugin:@typescript-eslint/eslint-recommended"
+        resolve(__dirname, "./build/eslint/eslint-config-typescript.js")
     ],
     overrides: [{
         files: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"]
     }],
-    globals: {
-        Atomics: "readonly",
-        SharedArrayBuffer: "readonly"
-    },
     parser: "@typescript-eslint/parser",
     parserOptions: {
-        ecmaFeatures: { jsx: true },
+        allowImportExportEverywhere: false,
+        requireConfigFile: false,
+        babelOptions: {
+            presets: ["@babel/env", "@babel/react"]
+        },
+        tsconfigRootDir: `${__dirname}`,
+        project: "tsconfig.json",
+        ecmaFeatures: {
+            jsx: true,
+            globalReturn: false
+        },
         ecmaVersion: 2022,
         sourceType: "module"
     },
     plugins: [
         "react",
         "react-hooks",
-        "import",
-        "@typescript-eslint"
+        "import"
     ],
     rules: {
-        "@typescript-eslint/semi": ["error", "always"],
         "react/react-in-jsx-scope": 0,
         "arrow-body-style": [2, "as-needed"],
         "prefer-template": 2,
@@ -64,16 +68,7 @@ module.exports = {
         ],
         "comma-dangle": [2, "never"],
         "no-trailing-spaces": 2,
-        "indent": [
-            2,
-            4,
-            {
-                SwitchCase: 1,
-                VariableDeclarator: 1
-            }
-        ],
         "no-undef-init": 2,
-        "no-undef": "error",
         "object-shorthand": [2, "always"],
         "react/jsx-no-undef": [
             2, {
@@ -122,7 +117,88 @@ module.exports = {
             {
                 "patterns": ["@mui/*/*/*"]
             }
-        ]
+        ],
+        "no-unused-vars": 1,
+        "quotes": [2, "double"],
+        "prefer-destructuring": [
+            1,
+            {
+                VariableDeclarator: {
+                    array: false,
+                    object: true
+                },
+                AssignmentExpression: {
+                    array: true,
+                    object: true
+                }
+            },
+            {
+                enforceForRenamedProperties: false
+            }
+        ],
+        "no-duplicate-imports": [2, { includeExports: true }],
+        "indent": [
+            2,
+            4,
+            {
+                SwitchCase: 1,
+                VariableDeclarator: 1,
+                ArrayExpression: "first",
+                outerIIFEBody: 1,
+                FunctionDeclaration: {
+                    parameters: 1,
+                    body: 1
+                },
+                FunctionExpression: {
+                    parameters: 1,
+                    body: 1
+                },
+                CallExpression: {
+                    arguments: 1
+                },
+                ObjectExpression: 1,
+                ImportDeclaration: 1,
+                flatTernaryExpressions: false,
+                ignoredNodes: [
+                    "JSXElement",
+                    "JSXElement > *",
+                    "JSXAttribute",
+                    "JSXIdentifier",
+                    "JSXNamespacedName",
+                    "JSXMemberExpression",
+                    "JSXSpreadAttribute",
+                    "JSXExpressionContainer",
+                    "JSXOpeningElement",
+                    "JSXClosingElement",
+                    "JSXText",
+                    "JSXEmptyExpression",
+                    "JSXSpreadChild"
+                ],
+                ignoreComments: false
+            }
+        ],
+        "operator-linebreak": [2, "after"],
+        "react/jsx-indent-props": [
+            2,
+            4
+        ],
+        "react/jsx-indent": [
+            2,
+            4
+        ],
+        "max-len": [
+            2,
+            {
+                code: 120,
+                tabWidth: 4,
+                ignoreRegExpLiterals: true,
+                ignoreUrls: true,
+                ignoreComments: false,
+                ignoreStrings: false,
+                ignoreTemplateLiterals: true
+            }
+        ],
+        "react/jsx-closing-bracket-location": [2, "tag-aligned"]
     },
     settings: {
         react: {
