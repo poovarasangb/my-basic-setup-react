@@ -1,22 +1,24 @@
 import { lazy, Suspense } from "react";
-import { useBrowserTimeCustomHook } from "./browserTime";
+import { useTime } from "./customHook/time";
 
-const BrowserTimeComp = lazy(() => import("./browserTime"));
+const DisplayTime = lazy(() => import("./displayTime"));
 
-export const App = () => {
-    const _time = new Date().getTime();
-    const { time } = useBrowserTimeCustomHook(_time);
-    const date = new Date(time);
+export const App = ({
+    time = new Date().getTime()
+}) => {
+    const [date] = useTime(time);
     return (
         <>
             <Suspense fallback={null}>
-                <BrowserTimeComp
-                    dateProps={_time}
+                <DisplayTime
+                    dateProps={time}
                 />
             </Suspense>
-            <h2>
+            <h1>
+                {"Using customHook ==> "}
                 {`${date.toLocaleDateString() } :: ${ date.toLocaleTimeString()}`}
-            </h2>
+            </h1>
+
         </>
     );
 };
