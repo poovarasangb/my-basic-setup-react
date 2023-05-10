@@ -10,7 +10,7 @@ const DisplayTime = ({
     const [date] = useTime(dateProps);
     return (
         <h1 className="red">
-            {`Using component ==> ${ date }`}
+            {`${date.toLocaleDateString() }::${ date.toLocaleTimeString()}`}
         </h1>
     );
 };
