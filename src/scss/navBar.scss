@@ -1,0 +1,53 @@
+.card {
+	width: calc(100% / 4);
+	transition: height 0.5s ease-in-out;
+    will-change: height;
+	background-color: #fff;
+	box-shadow: 0 3px 10px 0 rgba(99, 118, 129, 0.3);
+	.card-text {
+		text-align: center;
+		padding: 16px;
+		.content{
+			text-transform: uppercase;
+		}
+	}
+}
+  
+.text {
+	padding: 10px;
+	background-color: white;
+}
+  
+.layout-column {
+	align-items: center;
+    display: flex;
+    justify-content: space-around;
+	flex-direction: column;
+}
+.links {
+	padding: 10px 0;
+	background-color: lightgrey;
+	cursor: pointer;
+	height: 1.5em;
+	align-items: center;
+    display: flex;
+    justify-content: space-around;
+}
+
+.links {
+	width: calc(100% / 4);
+	.nav-tab {
+		color: var(--heading-color);
+		min-width: 80px;
+		min-height: 44px;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
+	}
+}
+
+.links a:focus,
+.links a:hover {
+	background-color: #eeeeee;
+}
