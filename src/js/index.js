@@ -3,7 +3,8 @@ import "scss/init.scss";
 import { createRoot } from "react-dom/client";
 import React from "react";
 
-import { App } from "./app";
+// import { App } from "./app";
+import Seats from "./component/seats";
 
 const mainElement = document.createElement("main");
 document.body.appendChild(mainElement);
@@ -12,6 +13,7 @@ const root = createRoot(mainElement);
 
 root.render(
     <React.StrictMode>
-        <App />
+        {/* <App /> */}
+        <Seats />
     </React.StrictMode>
 );

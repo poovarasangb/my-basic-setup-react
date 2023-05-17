@@ -1,0 +1,28 @@
+.background {
+    border: 1px #1E1E1E;
+    background-color: #1E1E1E;
+    width: 700px;
+    height: 700px;
+    padding: 20px;
+}
+
+.rowSeats {
+    padding: 16px;
+}
+
+.seat {
+    cursor: pointer;
+    border: 5px #172E09 solid;
+    border-radius: 8px 8px 0 0;
+    background-color: #E1E1E1;
+    width: 20px;
+    height: 20px;
+    margin: 16px;
+    display: inline-flex;
+    &.isSelected {
+        background-color: #172E09 !important;
+        .text {
+            color: red;
+        }
+    }
+}
