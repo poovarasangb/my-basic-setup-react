@@ -10,7 +10,7 @@
     "postinstall": "./node_modules/.bin/husky install",
     "cleanIns": "npm run clean && pnpm run ins",
     "devServer": "webpack serve --config  ./build/configs/webpack.common.js",
-    "cleanWatch": "npm run cleanIns && npm run watch",
+    "cleanWatch": "npm run cleanIns && npm run devServer",
     "hook-script-pre-commit": "node --max-old-space-size=8192 ./build/gitScripts/preCommit.js"
   },
   "eslintConfig": {
