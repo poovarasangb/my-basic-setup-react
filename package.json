@@ -6,7 +6,7 @@
   "scripts": {
     "gitClean": "git clean -x -d -f -e .history -e src -e build",
     "clean": "rm -rf node_modules package-lock.json output pnpm-lock.yaml",
-    "ins": "pnpm i --registry https://registry.npmjs.com",
+    "ins": "pnpm i --registry https://registry.npmjs.org",
     "postinstall": "./node_modules/.bin/husky install",
     "cleanIns": "npm run clean && pnpm run ins",
     "devServer": "webpack serve --config  ./build/configs/webpack.common.js",
