@@ -8,7 +8,7 @@ const log = require("terminal-kit").terminal;
 const basePath = path.resolve(__dirname, "../../");
 
 // eslint-disable-next-line quotes
-const ESLINT_CMD = `node --max-old-space-size=8192 ./node_modules/eslint/bin/eslint.js -c .eslintrc.js -f stylish --quiet`;
+const ESLINT_CMD = `node --max-old-space-size=8192 ./node_modules/eslint/bin/eslint.js -c eslint.config.mjs -f stylish --quiet`;
 
 // #1 - Run eslint for modified JS files
 // Get modified files list
