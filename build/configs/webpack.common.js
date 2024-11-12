@@ -2,13 +2,12 @@ const path = require("path");
 
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const ESLintPlugin = require("eslint-webpack-plugin");
 
 const isProduction = process.env.NODE_ENV === "production";
 const BASE_DIRECTORY = path.resolve("./");
 
 const {
-    entryFile, srcJsPath, portToListen, outputPath
+    entryFile, portToListen, outputPath
 } = require("../utils.js");
 
 module.exports = () => ({
@@ -54,14 +53,7 @@ module.exports = () => ({
         new HtmlWebpackPlugin({
             favicon: path.resolve(__dirname, "../../src/img/logo.png")
         }),
-        new MiniCssExtractPlugin({}),
-        new ESLintPlugin({
-            context: srcJsPath,
-            failOnError: false,
-            emitWarning: false,
-            failOnWarning: false,
-            emitError: false
-        })
+        new MiniCssExtractPlugin({})
     ],
 
     module: {
