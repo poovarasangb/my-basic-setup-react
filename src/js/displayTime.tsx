@@ -6,7 +6,7 @@ interface defaultProps {
 
 const DisplayTime = ({
     dateProps = new Date().getTime()
-}: defaultProps): JSX.Element => {
+}: defaultProps): JSX.IntrinsicElements => {
     const [date] = useTime(dateProps);
     return (
         <h1 className="red">
